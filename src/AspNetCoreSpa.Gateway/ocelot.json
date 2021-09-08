@@ -1,0 +1,29 @@
+﻿{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/api/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "asp-net-core-spa-api",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/{everything}"
+        },
+        {
+            "DownstreamPathTemplate": "/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "asp-net-core-spa-api",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/{everything}"
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:8080"
+    }
+}

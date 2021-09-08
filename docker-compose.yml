@@ -1,0 +1,16 @@
+version: "3.5"
+services:
+
+  asp-net-core-spa-gateway:
+    image: asp-net-core-spa-gateway
+    build:
+      dockerfile: Dockerfile
+      context: publish/AspNetCoreSpa.Gateway
+    ports:
+      - 8080:80
+
+  asp-net-core-spa-api:
+    image: asp-net-core-spa-api
+    build:
+      dockerfile: Dockerfile
+      context: publish/AspNetCoreSpa.Api
