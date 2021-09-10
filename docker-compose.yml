@@ -14,3 +14,9 @@ services:
     build:
       dockerfile: Dockerfile
       context: publish/AspNetCoreSpa.Api
+
+  asp-net-core-spa-front:
+    image: asp-net-core-spa-front
+    build:
+      dockerfile: Dockerfile
+      context: publish/AspNetCoreSpa.Front

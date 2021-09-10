@@ -16,7 +16,7 @@
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "asp-net-core-spa-api",
+                    "Host": "asp-net-core-spa-front",
                     "Port": 80
                 }
             ],
