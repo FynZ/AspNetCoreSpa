@@ -20,3 +20,9 @@ services:
     build:
       dockerfile: Dockerfile
       context: publish/AspNetCoreSpa.Front
+  
+  asp-net-core-spa-angular:
+    image: asp-net-core-spa-angular
+    build:
+      dockerfile: Dockerfile
+      context: publish/AspNetCoreSpa.Angular

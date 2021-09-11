@@ -64,11 +64,13 @@ Task("Publish")
 Task("BuildFront")
     .Does(() =>
 {
-    // NpmInstall(s => s.FromPath("./src/AspNetCoreSpa.Front/"));
-    // NpmRunScript(s => s.FromPath("./src/AspNetCoreSpa.Front/"));
     NpmInstall(s => s.FromPath("./src/AspNetCoreSpa.Front/"));
     NpmRunScript("generate", s => s.FromPath("./src/AspNetCoreSpa.Front/"));
+
+     NpmInstall(s => s.FromPath("./src/AspNetCoreSpa.Angular/"));
+    NpmRunScript("build", s => s.FromPath("./src/AspNetCoreSpa.Angular/"));
 });
+
 
 Task("PublishFront")
     .IsDependentOn("BuildFront")
@@ -79,20 +81,12 @@ Task("PublishFront")
     foreach (var project in projects)
     {
         var targetDirectory = project.GetDirectory().GetDirectoryName();
+
         Information($"Directory is : {targetDirectory}");
         CreateDirectory($"./publish/{targetDirectory}");
 
-        // copy root files
-        var files = GetFiles($"./src/{targetDirectory}/dist/*");
-        CopyFiles(files, $"./publish/{targetDirectory}");
-
-        // copy directories
-        var directories = GetDirectories($"./src/{targetDirectory}/dist/*");
-        foreach (var directory in directories)
-        {
-            CopyDirectory(directory, $"./publish/{targetDirectory}/{directory.GetDirectoryName()}");
-        }
-
+        CopyDirectory($"./src/{targetDirectory}/dist", $"./publish/{targetDirectory}");
+       
         // copy Dockerfile
         CopyFile($"./src/{targetDirectory}/Dockerfile", $"./publish/{targetDirectory}/Dockerfile");
     }
