@@ -9,6 +9,23 @@ services:
     ports:
       - 8080:80
 
+  asp-net-core-spa-identity-server:
+    image: asp-net-core-spa-identity-server
+    build:
+      dockerfile: Dockerfile
+      context: publish/AspNetCoreSpa.IdentityServer
+    environment:
+      ASPNETCORE_ENVIRONMENT: "docker"
+      GoogleClientId: ${GoogleClientId}
+      GoogleClientSecret: ${GoogleClientSecret}
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "azerty123"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/https/aspnetapp.pfx"
+    ports:
+      - 8090:443
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
   asp-net-core-spa-api:
     image: asp-net-core-spa-api
     build:
