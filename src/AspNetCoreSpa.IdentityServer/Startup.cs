@@ -42,6 +42,12 @@ namespace AspNetCoreSpa.IdentityServer
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.ClientId = configuration["GoogleClientId"];
                     options.ClientSecret = configuration["GoogleClientSecret"];
+                })
+                .AddTwitch("Twitch", options =>
+                {
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    options.ClientId = configuration["TwitchClientId"];
+                    options.ClientSecret = configuration["TwitchClientSecret"];
                 });
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
