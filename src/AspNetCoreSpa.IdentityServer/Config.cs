@@ -4,6 +4,7 @@
 
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityServer4;
 
 namespace AspNetCoreSpa.IdentityServer
 {
@@ -11,8 +12,10 @@ namespace AspNetCoreSpa.IdentityServer
     {
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
-            { 
-                new IdentityResources.OpenId()
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+                new IdentityResources.Email(),
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -20,7 +23,27 @@ namespace AspNetCoreSpa.IdentityServer
             { };
 
         public static IEnumerable<Client> Clients =>
-            new Client[] 
-            { };
+            new Client[]
+            {
+                new Client
+                {
+                    ClientName = "Angular-Client",
+                    ClientId = "angular-client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RedirectUris = new List<string>{ "http://localhost:4200/signin-callback", "http://localhost:4200/assets/silent-callback.html" },
+                    RequirePkce = true,
+                    AllowAccessTokensViaBrowser = true,
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    },
+                    AllowedCorsOrigins = { "http://localhost:4200" },
+                    RequireClientSecret = false,
+                    PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback" },
+                    RequireConsent = false,
+                    AccessTokenLifetime = 600
+                }
+            };
     }
 }
