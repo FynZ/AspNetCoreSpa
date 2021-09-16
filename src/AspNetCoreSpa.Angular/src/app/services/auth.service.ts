@@ -17,10 +17,10 @@ export class AuthService {
     return {
       authority: Constants.idpAuthority,
       client_id: Constants.clientId,
-      redirect_uri: `${Constants.clientRoot}/signin-callback`,
+      redirect_uri: `${Constants.clientRoot}/${Constants.signInRedirectCallback}`,
       scope: Constants.scope,
       response_type: "code",
-      post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`
+      post_logout_redirect_uri: `${Constants.clientRoot}/${Constants.signOutRedirectCallback}`
     }
   }
   constructor() {
@@ -40,6 +40,24 @@ export class AuthService {
         this.user = user;
         return this.checkUser(user);
       })
+  }
+
+  public finishLogin = (): Promise<User> => {
+    return this.userManager.signinRedirectCallback()
+      .then(user => {
+        console.log(user);
+        this.user = user;
+        this.loginChangedSubject.next(this.checkUser(user));
+        return user;
+      })
+  }
+
+  public logout = () => {
+    this.userManager.signoutRedirect().finally();
+  }
+  public finishLogout = () => {
+    this.user = null;
+    return this.userManager.signoutRedirectCallback();
   }
 
   private checkUser = (user : User | null): boolean => {

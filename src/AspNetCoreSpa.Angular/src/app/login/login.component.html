@@ -1,1 +1,4 @@
-<button mat-raised-button (click)="login()">Login</button>
+<section>
+  <button *ngIf="!this.isUserAuthenticated" mat-raised-button (click)="login()">Login</button>
+  <button *ngIf="this.isUserAuthenticated" mat-raised-button (click)="logout()">Logout</button>
+</section>
