@@ -3,7 +3,7 @@
   public static clientRoot = "http://localhost:4200";
   public static idpAuthority = "https://localhost:5001";
   public static clientId = "angular-client";
-  public static scope = "openid profile";
+  public static scope = "openid profile backApi";
   public static signInRedirectCallback = "signin-callback";
   public static signOutRedirectCallback = "signout-callback";
 }

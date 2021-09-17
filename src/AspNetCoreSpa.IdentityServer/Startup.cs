@@ -28,13 +28,15 @@ namespace AspNetCoreSpa.IdentityServer
             services.AddControllersWithViews();
 
             var builder = services.AddIdentityServer(options =>
-            {
-                // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
-                options.EmitStaticAudienceClaim = true;
-            })
+                {
+                    // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
+                    options.EmitStaticAudienceClaim = true;
+                })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiResources(Config.GetApiResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients);
+
 
             services.AddAuthentication()
                 .AddGoogle("Google", options =>
@@ -49,6 +51,7 @@ namespace AspNetCoreSpa.IdentityServer
                     options.ClientId = configuration["TwitchClientId"];
                     options.ClientSecret = configuration["TwitchClientSecret"];
                 });
+            
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
         }

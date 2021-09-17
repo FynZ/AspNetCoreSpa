@@ -60,6 +60,13 @@ export class AuthService {
     return this.userManager.signoutRedirectCallback();
   }
 
+  public getAccessToken = (): Promise<string | null> => {
+    return this.userManager.getUser()
+      .then(user => {
+        return !!user && !user.expired ? user.access_token : null;
+      })
+  }
+
   private checkUser = (user : User | null): boolean => {
     return !!user && !user.expired;
   }

@@ -20,8 +20,18 @@ namespace AspNetCoreSpa.IdentityServer
 
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
-            { };
+            {
+                new ApiScope("backApi", "Back API")
+            };
 
+        public static IEnumerable<ApiResource> GetApiResources =>
+            new List<ApiResource> 
+            { 
+                new ApiResource("backApi", "Back API") 
+                { 
+                    Scopes = { "backApi" } 
+                } 
+            };
         public static IEnumerable<Client> Clients =>
             new Client[]
             {
@@ -36,7 +46,8 @@ namespace AspNetCoreSpa.IdentityServer
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "backApi"
                     },
                     AllowedCorsOrigins = { "http://localhost:4200" },
                     RequireClientSecret = false,
