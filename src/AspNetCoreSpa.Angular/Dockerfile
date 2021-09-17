@@ -1,2 +1,3 @@
 FROM nginx:1.21.3
-COPY . /usr/share/nginx/html
+COPY ./client /usr/share/nginx/html
+COPY ./client/nginx.conf /etc/nginx/nginx.conf

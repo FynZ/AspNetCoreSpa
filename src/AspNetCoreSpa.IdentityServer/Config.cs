@@ -40,7 +40,8 @@ namespace AspNetCoreSpa.IdentityServer
                     ClientName = "Angular-Client",
                     ClientId = "angular-client",
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = new List<string>{ "http://localhost:4200/signin-callback", "http://localhost:4200/assets/silent-callback.html" },
+                    RedirectUris = new List<string>{ "http://localhost:8080/signin-callback", "http://localhost:8080/assets/silent-callback.html" },
+                    //RedirectUris = new List<string>{ "http://localhost:4200/signin-callback", "http://localhost:4200/assets/silent-callback.html" },
                     RequirePkce = true,
                     AllowAccessTokensViaBrowser = true,
                     AllowedScopes =
@@ -49,9 +50,11 @@ namespace AspNetCoreSpa.IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "backApi"
                     },
-                    AllowedCorsOrigins = { "http://localhost:4200" },
                     RequireClientSecret = false,
-                    PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback" },
+                    AllowedCorsOrigins = new List<string>{"http://localhost:8080"},
+                    PostLogoutRedirectUris = new List<string> { "http://localhost:8080/signout-callback" },
+                    //AllowedCorsOrigins = new List<string>{"http://localhost:4200"},
+                    //PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback" },
                     RequireConsent = false,
                     AccessTokenLifetime = 600
                 }

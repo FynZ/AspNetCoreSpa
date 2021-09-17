@@ -23,18 +23,14 @@ namespace AspNetCoreSpa.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
-            if (env.IsDevelopment())
-            {
-                ConfigureCors(services);
-            }
 
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", opt =>
                 {
                     opt.RequireHttpsMetadata = false;
-                    opt.Authority = "https://localhost:5001";
+                    opt.Authority = "https://localhost:8090";
                     opt.Audience = "backApi";
                 });
             services.AddControllers();
@@ -66,7 +62,6 @@ namespace AspNetCoreSpa.Api
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AspNetCoreSpa.Api v1"));
-                app.UseCors("default");
             }
 
             app.UseRouting();

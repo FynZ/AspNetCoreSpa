@@ -67,7 +67,7 @@ Task("BuildFront")
     NpmInstall(s => s.FromPath("./src/AspNetCoreSpa.Front/"));
     NpmRunScript("generate", s => s.FromPath("./src/AspNetCoreSpa.Front/"));
 
-     NpmInstall(s => s.FromPath("./src/AspNetCoreSpa.Angular/"));
+    NpmInstall(s => s.FromPath("./src/AspNetCoreSpa.Angular/"));
     NpmRunScript("build", s => s.FromPath("./src/AspNetCoreSpa.Angular/"));
 });
 
@@ -83,12 +83,13 @@ Task("PublishFront")
         var targetDirectory = project.GetDirectory().GetDirectoryName();
 
         Information($"Directory is : {targetDirectory}");
-        CreateDirectory($"./publish/{targetDirectory}");
+        CreateDirectory($"./publish/{targetDirectory}/client");
 
-        CopyDirectory($"./src/{targetDirectory}/dist", $"./publish/{targetDirectory}");
+        CopyDirectory($"./src/{targetDirectory}/dist", $"./publish/{targetDirectory}/client");
        
         // copy Dockerfile
         CopyFile($"./src/{targetDirectory}/Dockerfile", $"./publish/{targetDirectory}/Dockerfile");
+        CopyFile($"./src/{targetDirectory}/nginx.conf", $"./publish/{targetDirectory}/client/nginx.conf");
     }
 });
 
