@@ -67,18 +67,14 @@ export default {
           property: 'refresh_token',
           maxAge: 60 * 60 * 24 * 30
         },
-        responseType: 'token',
+        responseType: 'code',
         grantType: 'authorization_code',
-        accessType: undefined,
-        redirectUri: 'http://localhost:3000/callback',
-        logoutRedirectUri: 'https://localhost:3000',
+        accessType: 'offline',
         clientId: 'js',
         scope: ['api1'],
-        state: 'NLiJTMqI54i73O8cF1CYG6EgylZ2MNbC',
-        codeChallengeMethod: '',
-        responseMode: '',
-        acrValues: '',
+        codeChallengeMethod: 'S256',
         // autoLogout: false
+        redirectUri: 'http://localhost:3000/callback'
       }
     }
   }

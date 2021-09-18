@@ -30,9 +30,13 @@ namespace AspNetCoreSpa.IdentityServer
                 new Client
                 {
                     ClientId = "js",
+                    ClientSecrets = { new Secret("NLiJTMqI54i73O8cF1CYG6EgylZ2MNbC") },
                     ClientName = "VueApi JavaScript Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.Code,
                     AllowAccessTokensViaBrowser = true,
+
+                    RequirePkce = true,
+                    RequireClientSecret = false,
 
                     RedirectUris = { "http://localhost:3000/callback" },
                     PostLogoutRedirectUris = { "http://localhost:3000" },
