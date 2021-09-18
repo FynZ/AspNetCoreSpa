@@ -40,9 +40,46 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  auth: {
+    strategies: {
+      social: {
+        scheme: 'oauth2',
+        endpoints: {
+          authorization: 'https://localhost:5001/connect/authorize',
+          token: 'https://localhost:5001/connect/token',
+          userInfo: 'https://localhost:5001/connect/userinfo',
+          logout: 'https://localhost:5001/logout'
+        },
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          maxAge: 1800
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        responseType: 'token',
+        grantType: 'authorization_code',
+        accessType: undefined,
+        redirectUri: 'http://localhost:3000/callback',
+        logoutRedirectUri: 'https://localhost:3000',
+        clientId: 'js',
+        scope: ['api1'],
+        state: 'NLiJTMqI54i73O8cF1CYG6EgylZ2MNbC',
+        codeChallengeMethod: '',
+        responseMode: '',
+        acrValues: '',
+        // autoLogout: false
+      }
+    }
   }
 }
